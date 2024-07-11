@@ -1,0 +1,606 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /*=============== GOOGLE FONTS ===============*/
+  
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+  
+  /*=============== VARIABLES CSS ===============*/
+  :root {
+    --header-height: 3.45rem;
+  
+    /*========== Colors ==========*/
+    /*Color mode HSL(hue, saturation, lightness)*/
+    --black-color: hsl(220, 24%, 12%);
+    --black-color-light: hsl(220, 24%, 15%);
+    --black-color-lighten: hsl(220, 20%, 18%);
+    --white-color: #fff;
+    /* --body-color: hsl(220, 100%, 97%); */
+  
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Montserrat", sans-serif;
+    --normal-font-size: .938rem;
+  
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-semi-bold: 600;
+  
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+  }
+  
+  /*========== Responsive typography ==========*/
+  @media screen and (min-width: 1024px) {
+    :root {
+      --normal-font-size: 1rem;
+    }
+  }
+  
+  /* Increase the width of the "Services" dropdown menu */
+  .dropdown__menu {
+    width: 200px;
+    /* Adjust this value as needed */
+  }
+  
+  /* Additional styling for better alignment and visibility */
+  .services-dropdown .dropdown__link,
+  .services-dropdown .dropdown__sublink {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .services-dropdown .dropdown__link:hover,
+  .services-dropdown .dropdown__sublink:hover {
+    background-color: var(--black-color-lighten);
+  }
+  
+  /*=============== BASE ===============*/
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    position: relative;
+  
+  
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  /*=============== REUSABLE CSS CLASSES ===============*/
+  .container {
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+  }
+  
+  /*=============== HEADER ===============*/
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--black-color);
+    box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+    z-index: var(--z-fixed);
+  }
+  
+  /*=============== NAV ===============*/
+  .nav {
+    height: var(--header-height);
+  }
+  
+  .nav__logo,
+  .nav__burger,
+  .nav__close {
+    color: var(--white-color);
+  }
+  
+  .nav__data {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav__logo {
+    display: inline-flex;
+    align-items: center;
+    column-gap: .25rem;
+    font-weight: var(--font-semi-bold);
+  }
+  
+  .nav__logo i {
+    font-weight: initial;
+    font-size: 1.25rem;
+  }
+  
+  .nav__toggle {
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .nav__burger,
+  .nav__close {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    inset: 0;
+    margin: auto;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: opacity .1s, transform .4s;
+  }
+  
+  .nav__close {
+    opacity: 0;
+  }
+  
+  /* Navigation for mobile devices */
+  @media screen and (max-width: 1118px) {
+    .nav__menu {
+      position: absolute;
+      left: 0;
+      top: 2.5rem;
+      width: 100%;
+      height: calc(100vh - 3.5rem);
+      overflow: auto;
+      pointer-events: none;
+      opacity: 0;
+      transition: top .4s, opacity .3s;
+    }
+  
+    .nav__menu::-webkit-scrollbar {
+      width: 0;
+    }
+  
+    .nav__list {
+      background-color: var(--black-color);
+      padding-top: 1rem;
+    }
+  }
+  
+  .nav__link {
+    color: var(--white-color);
+    background-color: var(--black-color);
+    font-weight: var(--font-semi-bold);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color .3s;
+  }
+  
+  .nav__link:hover {
+    background-color: var(--black-color-light);
+  }
+  
+  /* Show menu */
+  .show-menu {
+    opacity: 1;
+    top: 3.5rem;
+    pointer-events: initial;
+  }
+  
+  /* Show icon */
+  .show-icon .nav__burger {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+  
+  .show-icon .nav__close {
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+  
+  /*=============== DROPDOWN ===============*/
+  .dropdown__item {
+    cursor: pointer;
+  }
+  
+  .dropdown__arrow {
+    font-size: 1.25rem;
+    font-weight: initial;
+    transition: transform .4s;
+  }
+  
+  .dropdown__link,
+  .dropdown__sublink {
+    padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+    color: var(--white-color);
+    background-color: var(--black-color-light);
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+    font-weight: var(--font-semi-bold);
+    transition: background-color .3s;
+  }
+  
+  .dropdown__link i,
+  .dropdown__sublink i {
+    font-size: 1.25rem;
+    font-weight: initial;
+  }
+  
+  .dropdown__link:hover,
+  .dropdown__sublink:hover {
+    background-color: var(--black-color);
+  }
+  
+  .dropdown__menu,
+  .dropdown__submenu {
+    max-height: 0;
+    overflow: auto;
+    transition: max-height .4s ease-out;
+  }
+  
+  /* Show dropdown menu & submenu */
+  .dropdown__item:hover .dropdown__menu,
+  .dropdown__subitem:hover>.dropdown__submenu {
+    max-height: 1000px;
+    transition: max-height .4s ease-in;
+  }
+  
+  /* Rotate dropdown icon */
+  .dropdown__item:hover .dropdown__arrow {
+    transform: rotate(180deg);
+  }
+  
+  /*=============== DROPDOWN SUBMENU ===============*/
+  .dropdown__add {
+    margin-left: auto;
+  }
+  
+  .dropdown__sublink {
+    background-color: var(--black-color-lighten);
+    max-height: 100px;
+    /* Adjust as needed */
+    overflow-y: auto;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    display: block;
+  }
+  
+  .dropdown__sublink:hover {
+    background-color: var(--black-color);
+  }
+  
+  .dropdown__submenu::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .dropdown__submenu::-webkit-scrollbar-thumb {
+    background-color: var(--black-color);
+    border-radius: 4px;
+  }
+  
+  /*=============== BREAKPOINTS ===============*/
+  /* For small devices */
+  @media screen and (max-width: 340px) {
+    .container {
+      margin-inline: 1rem;
+    }
+  
+    .nav__link {
+      padding-inline: 1rem;
+    }
+  }
+  
+  /* For large devices */
+  @media screen and (min-width: 1118px) {
+    .container {
+      margin-inline: auto;
+    }
+  
+    .nav {
+      height: calc(var(--header-height) + 2rem);
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .nav__toggle {
+      display: none;
+    }
+  
+    .nav__list {
+      height: 100%;
+      display: flex;
+      column-gap: 3rem;
+    }
+  
+    .nav__link {
+      height: 100%;
+      padding: 0;
+      justify-content: initial;
+      column-gap: .25rem;
+    }
+  
+    .nav__link:hover {
+      background-color: transparent;
+    }
+  
+    .dropdown__item,
+    .dropdown__subitem {
+      position: relative;
+    }
+  
+    .dropdown__menu,
+    .dropdown__submenu {
+      max-height: initial;
+      overflow: initial;
+      position: absolute;
+      left: 0;
+      top: 6rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s, top .3s;
+    }
+  
+    .dropdown__link,
+    .dropdown__sublink {
+      max-height: 1200px;
+      max-width: 1200px;
+      overflow: auto;
+      padding-inline: 1rem 3.5rem;
+    }
+  
+    .dropdown__sublink {
+      max-height: 1400px;
+      margin-right: 100px;
+      width: 1200px;
+      overflow: auto;
+  
+    }
+  
+    .dropdown__subitem .dropdown__link {
+      padding-inline: 1rem;
+    }
+  
+    .dropdown__submenu {
+      position: absolute;
+      left: 100%;
+      top: .5rem;
+    }
+  
+    /* Show dropdown menu */
+    .dropdown__item:hover .dropdown__menu {
+      opacity: 1;
+      top: 5.5rem;
+      pointer-events: initial;
+      transition: top .3s;
+    }
+  
+    /* Show dropdown submenu */
+    .dropdown__subitem:hover>.dropdown__submenu {
+      opacity: 1;
+      top: 0;
+      pointer-events: initial;
+      transition: top .3s;
+    }
+  }
+  
+  /*------------------------------sec-01 css-----------------------------*/
+  /*--------------skider section css starts from here-------------*/
+  .slider{
+    width: 100%;
+    /* width: 100%; */
+    max-width: 100vw;
+    min-height: 100vh;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .list{
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: max-content;
+    transition: 1s;
+  }
+  .list img{
+    width: 1500px;
+    max-width: 100vw;
+    height: 100%;
+    object-fit: cover;
+  }
+  .buttons{
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .buttons button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff5;
+    color: #fff;
+    border: none;
+    font-family: monospace;
+    font-weight: bold;
+
+  }
+  .dots{
+    position: absolute;
+    bottom: 10px;
+    color: #fff;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .dots li{
+    list-style: none;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 20px;
+    transition: 1s;
+
+  }
+  .dots li.active{
+    width: 30px;
+  }
+  /*--------------skider section css ends from here-------------*/
+  @media screen and (max-width:1336px){
+    .slider{
+        height: 400px;
+    }
+  }
+  /*------------------section -02 css starts here----------------*/
+  .sec-02{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 20vh;
+    background-image: url(images/infoimg1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .info{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  .info1{
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+    width: auto;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 40px;
+    
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .info1:nth-last-of-type(2){
+    border-right: 2px solid lightgray;
+    height: 80px;
+  }
+  /*------------------section -02 css ends here----------------*/
+  /*------------------section -02  responsive css starts here----------------*/
+  @media only screen and (min-width:200px) and (max-width:1336px){
+
+      .sec-02{
+        display: flex;
+        flex-direction: column;
+      }
+      .info{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+  }
+  .info1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    height: auto;
+}
+.info1:nth-last-of-type(2){
+    border: none;
+  }
+  }
+  /*------------------section -02  responsive css ends here----------------*/
+  /*------------------section -03  css starts here----------------*/
+  .sec-03{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+  }
+  .details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 50px;
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    
+  }
+  .detailcontent h3{
+    text-align: center;
+    height: auto;
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+  }
+  .detailcontent p{
+    text-align: left;
+    line-height: 1.6;
+    color: #7b7b7b;
+  }
+  /*------------------section -03  css ends here----------------*/
+  /*------------------section -03  responsive css starts here----------------*/
+  @media only screen and (min-width:200px) and (max-width:1336px){
+
+      .sec-03{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        overflow-x: hidden;
+      }
+      .details{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        
+        
+      }
+      .detailcontent h3{
+        font-size: 2rem;
+
+      }
+      .detailcontent p{
+        text-align: left;
+        font-size: 1.5rem;
+      }
+      
+      .details1 img{
+        width: 100%;
+        height: auto;
+      }
+  }
+  /*------------------section -03  responsive css ends here----------------*/
